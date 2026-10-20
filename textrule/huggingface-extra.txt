@@ -1,0 +1,2 @@
+DOMAIN-SUFFIX,huggingface.com
+DOMAIN-SUFFIX,huggingface.cn

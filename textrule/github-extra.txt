@@ -1,0 +1,3 @@
+DOMAIN-REGEX,^productionresultssa[0-9]*\.blob\.core\.windows\.net$
+DOMAIN-REGEX,^(maven|npm|nuget|rubygems)registryv2prod\.blob\.core\.windows\.net$
+DOMAIN,default.exp-tas.com

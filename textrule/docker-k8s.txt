@@ -38,6 +38,7 @@ DOMAIN-SUFFIX,public.ecr.aws
 DOMAIN,gallery.ecr.aws
 # ECR Public image-config download redirect, verified 2026-10-21.
 DOMAIN,d2glxqk2uabbnd.cloudfront.net
+DOMAIN,d5l0dvt14r5h8.cloudfront.net
 DOMAIN-REGEX,^([a-z0-9-]+\.)?(dkr\.)?ecr(-fips|-public)?\.[a-z0-9-]+\.amazonaws\.com$
 DOMAIN-REGEX,^[a-z0-9-]+\.dkr-ecr(-fips)?\.[a-z0-9-]+\.on\.aws$
 DOMAIN-REGEX,^ecr(-fips|-public)?\.[a-z0-9-]+\.api\.aws$

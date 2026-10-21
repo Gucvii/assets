@@ -1,0 +1,53 @@
+# Overseas container registries; Mihomo classical TextRule, without policy names.
+# Sources and scope: ./README.md
+
+# Docker Hub: registry, token service, login and image-layer delivery.
+DOMAIN-SUFFIX,docker.io
+DOMAIN,hub.docker.com
+DOMAIN,login.docker.com
+DOMAIN,auth.docker.com
+DOMAIN,production.cloudflare.docker.com
+DOMAIN,production.cloudfront.docker.com
+DOMAIN,docker-images-prod.6aa30f8b08e16409b46e0173d6de2f56.r2.cloudflarestorage.com
+DOMAIN-SUFFIX,dhi.io
+
+# GitHub Container Registry: precedes the broader GitHub service rule set.
+DOMAIN-SUFFIX,ghcr.io
+DOMAIN,pkg-containers.githubusercontent.com
+DOMAIN,github-registry-files.githubusercontent.com
+
+# Quay and Red Hat, including Quay image-layer CDN hosts.
+DOMAIN-SUFFIX,quay.io
+DOMAIN,registry.redhat.io
+DOMAIN,registry.access.redhat.com
+DOMAIN,sso.redhat.com
+
+# Kubernetes registry, Google Container Registry and Docker Artifact Registry.
+DOMAIN-SUFFIX,registry.k8s.io
+DOMAIN-SUFFIX,gcr.io
+DOMAIN-REGEX,^[a-z0-9-]+-docker\.pkg\.dev$
+DOMAIN,k8s-artifacts-prod.storage.googleapis.com
+DOMAIN-REGEX,^prod-registry-k8s-io-[a-z0-9-]+\.s3[.-](dualstack\.)?[a-z0-9-]+\.amazonaws\.com$
+
+# Microsoft Container Registry and Azure Container Registry.
+DOMAIN-SUFFIX,mcr.microsoft.com
+DOMAIN-SUFFIX,azurecr.io
+
+# Amazon ECR public/private, API endpoints and ECR-owned layer buckets.
+DOMAIN-SUFFIX,public.ecr.aws
+DOMAIN,gallery.ecr.aws
+# ECR Public image-config download redirect, verified 2026-10-21.
+DOMAIN,d2glxqk2uabbnd.cloudfront.net
+DOMAIN-REGEX,^([a-z0-9-]+\.)?(dkr\.)?ecr(-fips|-public)?\.[a-z0-9-]+\.amazonaws\.com$
+DOMAIN-REGEX,^[a-z0-9-]+\.dkr-ecr(-fips)?\.[a-z0-9-]+\.on\.aws$
+DOMAIN-REGEX,^ecr(-fips|-public)?\.[a-z0-9-]+\.api\.aws$
+DOMAIN-REGEX,^prod-[a-z0-9-]+-starport-layer-bucket\.s3([.-](dualstack\.)?[a-z0-9-]+)?\.amazonaws\.com$
+
+# NVIDIA NGC registry, authentication and related catalog endpoints.
+DOMAIN-SUFFIX,nvcr.io
+DOMAIN-SUFFIX,ngc.nvidia.com
+DOMAIN,authn.nvidia.com
+
+# GitLab.com container registry and its dedicated CDN.
+DOMAIN,registry.gitlab.com
+DOMAIN,cdn.registry.gitlab-static.net

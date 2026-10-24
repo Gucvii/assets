@@ -7,8 +7,37 @@
 | `github-extra.txt` | GitHub 共享云端点补充 | `classical` |
 | `huggingface-extra.txt` | Hugging Face 域名补充 | `classical` |
 | `docker-k8s.txt` | 海外主流容器镜像仓库、认证和镜像层下载端点 | `classical` |
+| `wloc-location.txt` | Apple 网络定位（WLOC）服务域名，需由使用方指定 `DIRECT` | `classical` |
 
 所有文件使用 `format: text`。策略组名称由使用方配置，规则文件不写策略。
+
+## WLOC 定位服务
+
+`wloc-location.txt` 覆盖 WLOC 模块 `[MITM] hostname` 中的 5 个定位主机：
+`gs-loc.apple.com`、`gs-loc-cn.apple.com`、`gsp-ssl.ls.apple.com`、
+`bluedot.is.autonavi.com`、`bluedot.is.autonavi.com.gds.alibabadns.com`。
+
+使用方必须把这些规则指定为 `DIRECT`，并放在所有 Apple、CDN、国内规则之前：
+
+```yaml
+rules:
+  - RULE-SET,wloc_location,DIRECT
+```
+
+原因：
+
+- `REJECT` 不可用。WLOC 的改写发生在 `http-response` 阶段，需要 Apple 的真实响应体；
+  掐断连接会使脚本不触发，`locationd` 随后降级到 GPS，结果是显示真实位置。
+- `PROXY` 不建议。绕节点增加往返延迟，可能让 `locationd` 超时降级到 GPS。
+- 必须优先于 `apple_cdn`、`apple_cn_non_ip`、`apple_services` 和 `domestic_non_ip`。
+  `apple_services` 的 `DOMAIN-SUFFIX,apple.com` 会命中 `gsp-ssl.ls.apple.com` 并把流量
+  导向可被切换到节点的策略组；显式直连规则可以消除这个漂移。
+
+规则全部为精确 `DOMAIN`，不做后缀匹配，因此不会劫持其他 `apple.com` 或
+`autonavi.com` / `alibabadns.com` 子域。
+
+本规则只影响使用方自身的网络路由，不构成对任何服务的绕过或绕过尝试；
+定位测试请仅用于自己拥有或已获授权的设备。
 
 ## Docker / Kubernetes 镜像仓库
 

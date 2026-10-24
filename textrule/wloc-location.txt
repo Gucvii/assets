@@ -1,0 +1,14 @@
+# WLOC 定位服务直连；Mihomo classical TextRule, without policy names.
+# Scope and rationale: ./README.md
+#
+# 必须 DIRECT，不能 REJECT：WLOC 的改写发生在 http-response 阶段，需要 Apple 的
+# 真实响应体作为输入；REJECT 会掐断连接使脚本不触发，locationd 随后降级到 GPS，
+# 结果是显示真实位置。也不应 PROXY：绕节点增加延迟，可能让 locationd 超时降级。
+#
+# 全部为精确 DOMAIN，不使用后缀匹配，因此不会影响其他 apple.com 或
+# autonavi.com / alibabadns.com 子域。
+DOMAIN,gs-loc.apple.com
+DOMAIN,gs-loc-cn.apple.com
+DOMAIN,gsp-ssl.ls.apple.com
+DOMAIN,bluedot.is.autonavi.com
+DOMAIN,bluedot.is.autonavi.com.gds.alibabadns.com
